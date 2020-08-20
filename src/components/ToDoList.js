@@ -5,12 +5,17 @@ import PropTypes from "prop-types";
 class ToDoList extends React.Component {
   render() {
     return this.props.todolist.map((todo) => (
-      <Item key={todo.id} todo={todo} />
+      <Item
+        key={todo.id}
+        todo={todo}
+        complete={this.props.complete}
+        delete={this.props.delete}
+      />
     ));
   }
 }
 ToDoList.propTypes = {
-  todos: PropTypes.array.isRequired,
+  todo: PropTypes.array.isRequired,
 };
 
 export default ToDoList;

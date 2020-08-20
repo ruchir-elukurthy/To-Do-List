@@ -1,6 +1,8 @@
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 import React from "react";
+import Headers from "./components/Headers";
+import Addmore from "./components/Addmore";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,11 +28,35 @@ class App extends React.Component {
     };
   }
 
+  complete = (id) => {
+    this.setState({
+      todolist: this.state.todolist.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+          console.log(id);
+          console.log(todo.completed);
+        }
+        return todo;
+      }),
+    });
+  };
+
+  delete = (id) => {
+    this.setState({
+      todolist: [...this.state.todolist.filter((todo) => todo.id !== id)],
+    });
+  };
+
   render() {
     return (
       <div className="App">
-        <h1>This is my To Do List</h1>
-        <ToDoList todolist={this.state.todolist} />
+        <Headers />
+        <Addmore />
+        <ToDoList
+          todolist={this.state.todolist}
+          complete={this.complete}
+          delete={this.delete}
+        />
       </div>
     );
   }
